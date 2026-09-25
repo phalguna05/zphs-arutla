@@ -13,7 +13,7 @@ const isDev = process.env.NODE_ENV !== "production";
 const DEV_DEFAULTS = { username: "admin", password: "arutla@2026", secret: "dev-only-secret-change-me-in-production!!" };
 
 function secret() {
-  const value = process.env.AUTH_SECRET ?? (isDev ? DEV_DEFAULTS.secret : undefined);
+  const value = process.env.AUTH_SECRET || (isDev ? DEV_DEFAULTS.secret : undefined);
   if (!value || value.length < 32) throw new Error("AUTH_SECRET must be set to at least 32 characters");
   return new TextEncoder().encode(value);
 }
@@ -25,8 +25,8 @@ function safeEqual(a: string, b: string) {
 }
 
 export function checkCredentials(username: string, password: string) {
-  const expectedUser = process.env.ADMIN_USERNAME ?? (isDev ? DEV_DEFAULTS.username : undefined);
-  const expectedPass = process.env.ADMIN_PASSWORD ?? (isDev ? DEV_DEFAULTS.password : undefined);
+  const expectedUser = process.env.ADMIN_USERNAME || (isDev ? DEV_DEFAULTS.username : undefined);
+  const expectedPass = process.env.ADMIN_PASSWORD || (isDev ? DEV_DEFAULTS.password : undefined);
   if (!expectedUser || !expectedPass) return false;
   return safeEqual(username, expectedUser) && safeEqual(password, expectedPass);
 }
