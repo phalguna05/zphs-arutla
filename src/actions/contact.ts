@@ -2,9 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { db } from "@/db";
-import { messages } from "@/db/schema";
 import { content } from "@/lib/content";
+import { store } from "@/lib/store";
 
 export type ContactState = { status: "idle" | "error" | "sent"; error?: string; values?: Record<string, string> };
 
@@ -24,7 +23,7 @@ export async function sendMessage(_: ContactState, formData: FormData): Promise<
   if (!z.email().safeParse(parsed.data.email).success) return { status: "error", error: errors.email, values };
 
   try {
-    await db.insert(messages).values({ ...parsed.data, phone: parsed.data.phone || null });
+    await store.addMessage({ ...parsed.data, phone: parsed.data.phone || null });
   } catch (error) {
     console.error(error);
     return { status: "error", error: errors.server, values };

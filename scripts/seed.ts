@@ -1,25 +1,38 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
-import seed from "../content/seed.json";
-import { notices, programs } from "../src/db/schema";
+import { messages, notices, programs, visitDays } from "../src/db/schema";
+import { todayISO } from "../src/lib/dates";
+import { buildMockData } from "../src/lib/mock-data";
 
 async function main() {
   const pool = new Pool({ connectionString: process.env.DATABASE_URL });
   const db = drizzle(pool);
+  const force = process.argv.includes("--force");
 
   const existing = await db.select({ id: programs.id }).from(programs).limit(1);
-  if (existing.length && !process.argv.includes("--force")) {
-    console.log("Database already has data. Run with --force to seed anyway.");
+  if (existing.length && !force) {
+    console.log("Database already has data. Run `npm run db:seed -- --force` to replace it with mock data.");
     return pool.end();
   }
 
-  const base = Date.now();
-  await db.insert(programs).values(
-    seed.programs.map((p, i) => ({ ...p, images: [], createdAt: new Date(base - i * 60_000) })),
-  );
-  await db.insert(notices).values(seed.notices);
+  const data = buildMockData(todayISO());
+  await db.transaction(async (tx) => {
+    if (force) {
+      await tx.delete(programs);
+      await tx.delete(notices);
+      await tx.delete(messages);
+      await tx.delete(visitDays);
+    }
+    await tx.insert(programs).values(data.programs);
+    await tx.insert(notices).values(data.notices);
+    await tx.insert(messages).values(data.messages);
+    await tx.insert(visitDays).values(data.visits);
+  });
 
-  console.log(`Seeded ${seed.programs.length} programs and ${seed.notices.length} notices.`);
+  console.log(
+    `Seeded ${data.programs.length} programs, ${data.notices.length} notices, ` +
+      `${data.messages.length} messages and ${data.visits.length} days of visits.`,
+  );
   await pool.end();
 }
 

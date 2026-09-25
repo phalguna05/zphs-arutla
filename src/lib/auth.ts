@@ -7,8 +7,13 @@ import { jwtVerify, SignJWT } from "jose";
 const COOKIE = "admin_session";
 const MAX_AGE = 60 * 60 * 8;
 
+const isDev = process.env.NODE_ENV !== "production";
+
+// Local development falls back to demo credentials so the site runs before any env vars are set.
+const DEV_DEFAULTS = { username: "admin", password: "arutla@2026", secret: "dev-only-secret-change-me-in-production!!" };
+
 function secret() {
-  const value = process.env.AUTH_SECRET;
+  const value = process.env.AUTH_SECRET ?? (isDev ? DEV_DEFAULTS.secret : undefined);
   if (!value || value.length < 32) throw new Error("AUTH_SECRET must be set to at least 32 characters");
   return new TextEncoder().encode(value);
 }
@@ -20,8 +25,8 @@ function safeEqual(a: string, b: string) {
 }
 
 export function checkCredentials(username: string, password: string) {
-  const expectedUser = process.env.ADMIN_USERNAME;
-  const expectedPass = process.env.ADMIN_PASSWORD;
+  const expectedUser = process.env.ADMIN_USERNAME ?? (isDev ? DEV_DEFAULTS.username : undefined);
+  const expectedPass = process.env.ADMIN_PASSWORD ?? (isDev ? DEV_DEFAULTS.password : undefined);
   if (!expectedUser || !expectedPass) return false;
   return safeEqual(username, expectedUser) && safeEqual(password, expectedPass);
 }

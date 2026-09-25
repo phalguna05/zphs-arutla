@@ -1,14 +1,12 @@
 "use server";
 
-import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { db } from "@/db";
-import { notices, programs } from "@/db/schema";
 import { requireAdmin } from "@/lib/auth";
 import { content } from "@/lib/content";
 import { todayISO } from "@/lib/dates";
+import { store } from "@/lib/store";
 import { uploadFiles } from "@/lib/upload";
 
 export type FormState = { error?: string; values?: Record<string, string> };
@@ -48,7 +46,7 @@ export async function addProgram(_: FormState, formData: FormData): Promise<Form
   }
 
   const { duration, coordinator, ...rest } = parsed.data;
-  await db.insert(programs).values({
+  await store.addProgram({
     ...rest,
     duration: duration || "2026–27",
     coordinator: coordinator || "To be announced",
@@ -60,7 +58,7 @@ export async function addProgram(_: FormState, formData: FormData): Promise<Form
 
 export async function removeProgram(id: number) {
   await requireAdmin();
-  await db.delete(programs).where(eq(programs.id, id));
+  await store.removeProgram(id);
   refresh();
   redirect("/admin?tab=programs&done=program-removed");
 }
@@ -86,7 +84,7 @@ export async function addNotice(_: FormState, formData: FormData): Promise<FormS
     return failure("Attachment upload failed. Please try again.", formData);
   }
 
-  await db.insert(notices).values({
+  await store.addNotice({
     ...parsed.data,
     date: parsed.data.date || todayISO(),
     pinned: formData.get("pinned") === "on",
@@ -98,7 +96,7 @@ export async function addNotice(_: FormState, formData: FormData): Promise<FormS
 
 export async function removeNotice(id: number) {
   await requireAdmin();
-  await db.delete(notices).where(eq(notices.id, id));
+  await store.removeNotice(id);
   refresh();
   redirect("/admin?tab=notices&done=notice-removed");
 }

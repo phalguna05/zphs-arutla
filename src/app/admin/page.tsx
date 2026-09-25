@@ -9,7 +9,7 @@ import { RemoveButton } from "@/components/admin/RemoveButton";
 import { Corners } from "@/components/Corners";
 import { requireAdmin } from "@/lib/auth";
 import { content } from "@/lib/content";
-import { getCounts, getMessages, getNotices, getPrograms, getVisitorStats } from "@/lib/data";
+import { getCounts, getMessages, getNotices, getPrograms, getVisitorStats, isMockData } from "@/lib/data";
 import { formatTimestamp, todayISO } from "@/lib/dates";
 import { uploadsEnabled } from "@/lib/upload";
 
@@ -80,6 +80,13 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
               <span className="admin-stat-value">{counts.messages}</span>
             </div>
           </div>
+
+          {isMockData() && (
+            <div className="demo-note">
+              Showing mock data from <code>content/mock-data.json</code>. Changes last until the server restarts. Set{" "}
+              <code>DATABASE_URL</code> to use PostgreSQL.
+            </div>
+          )}
 
           {toast && <div className="toast" role="status">{toast}</div>}
 
