@@ -1,0 +1,298 @@
+{
+  "school": {
+    "name": "PM SHRI ZPHS Arutla",
+    "shortName": "ZPHS Arutla",
+    "tagline": "Zilla Parishad High School · Telangana Public School, Arutla",
+    "logo": "/images/pmshri-logo.jpeg",
+    "logoAlt": "PM SHRI logo",
+    "timezone": "Asia/Kolkata"
+  },
+  "seo": {
+    "title": "PM SHRI ZPHS Arutla",
+    "description": "Zilla Parishad High School, Arutla — a free government high school (Classes VI–X) in Manchal Mandal, Ranga Reddy, Telangana, upgraded under the PM SHRI scheme."
+  },
+  "topBar": {
+    "department": "Government of Telangana · School Education Department · Samagra Shiksha",
+    "items": ["UDISE 3605 0700 xxx", "Telugu & English medium"],
+    "staffLoginLabel": "Staff login"
+  },
+  "nav": [
+    { "key": "home", "label": "Home", "href": "/" },
+    { "key": "about", "label": "About", "href": "/about" },
+    { "key": "programs", "label": "Programs", "href": "/programs" },
+    { "key": "notices", "label": "Notice Board", "href": "/notices" },
+    { "key": "contact", "label": "Contact", "href": "/contact" }
+  ],
+  "footer": {
+    "address": ["ZPHS Arutla, Arutla, Manchal Mandal,", "Ranga Reddy District, Telangana 501508"],
+    "officeHours": "Office: Mon–Sat, 9:00 am – 4:30 pm",
+    "quickLinksTitle": "Quick links",
+    "quickLinks": [
+      { "label": "About & staff", "href": "/about" },
+      { "label": "Programs", "href": "/programs" },
+      { "label": "Notice board", "href": "/notices" },
+      { "label": "Contact", "href": "/contact" },
+      { "label": "Admin login", "href": "/admin/login" }
+    ],
+    "usefulLinksTitle": "Useful links",
+    "usefulLinks": [
+      { "label": "PM SHRI portal", "href": "https://pmshrischools.education.gov.in" },
+      { "label": "School Education, Telangana", "href": "https://schooledu.telangana.gov.in" },
+      { "label": "DIKSHA", "href": "https://diksha.gov.in" },
+      { "label": "National Scholarship Portal", "href": "https://scholarships.gov.in" },
+      { "label": "BSE Telangana (SSC)", "href": "https://bse.telangana.gov.in" }
+    ],
+    "visitorsTitle": "Website visitors",
+    "onlineLabel": "online now",
+    "todayLabel": "today",
+    "copyright": "© 2026 PM SHRI ZPHS Arutla · Zilla Parishad, Ranga Reddy",
+    "lastUpdated": "Last updated 24 Sep 2026"
+  },
+  "visitorCounter": {
+    "startFrom": 48213
+  },
+  "home": {
+    "ticker": { "label": "Latest", "linkLabel": "All notices →" },
+    "hero": {
+      "kicker": "A PM SHRI school · Classes VI – X · Co-educational",
+      "title": "A public high school for every child of Arutla.",
+      "text": "Zilla Parishad High School, Arutla is a free government school in Manchal Mandal, upgraded under the PM SHRI scheme with digital classrooms, science and computer labs, and a kitchen garden that feeds our mid-day meal.",
+      "primaryCta": { "label": "Admissions 2027–28", "href": "#admissions" },
+      "secondaryCta": { "label": "Notice board", "href": "/notices" },
+      "image": { "src": "", "alt": "Photo of the school building" }
+    },
+    "facts": [
+      { "label": "Classes", "value": "VI – X" },
+      { "label": "Medium", "value": "Telugu & English" },
+      { "label": "Board", "value": "BSE Telangana" },
+      { "label": "Management", "value": "Zilla Parishad" },
+      { "label": "Scheme", "value": "PM SHRI" }
+    ],
+    "about": {
+      "kicker": "01 · About the school",
+      "title": "Serving Arutla and its neighbouring villages",
+      "paragraphs": [
+        "ZPHS Arutla offers Classes VI to X in Telugu and English medium, preparing students for the SSC examinations of the Board of Secondary Education, Telangana. Under PM SHRI the school is being developed as a model for the mandal — with activity-based learning, green campus practices and stronger links to the community.",
+        "Education is free. Textbooks, uniforms and a hot mid-day meal are provided to every student."
+      ],
+      "link": { "label": "History, staff and disclosures →", "href": "/about" }
+    },
+    "headmaster": {
+      "kicker": "Headmaster's message",
+      "quote": "“A government school should be the best school in the village. That is the standard we hold ourselves to, every day.”",
+      "name": "Sri K. Srinivas Reddy, Headmaster",
+      "image": { "src": "", "alt": "Headmaster" }
+    },
+    "academics": {
+      "kicker": "02 · Academics",
+      "levels": [
+        { "classes": "Classes VI – VII", "description": "Telugu, Hindi, English, Mathematics, General Science, Social Studies, with art, work education and physical education." },
+        { "classes": "Class VIII", "description": "Physical and Biological Science taught separately; NMMS scholarship coaching." },
+        { "classes": "Classes IX – X", "description": "SSC syllabus of the Board of Secondary Education, Telangana. Special classes and study hours before board exams." },
+        { "classes": "Assessment", "description": "Continuous and comprehensive evaluation: four Formative (FA) and two Summative (SA) assessments a year." }
+      ]
+    },
+    "facilities": {
+      "kicker": "03 · Facilities",
+      "items": ["Digital classrooms", "Computer lab", "Science laboratory", "Library & reading corner", "Playground", "Kitchen garden", "RO drinking water", "Separate toilets for girls"]
+    },
+    "schemes": {
+      "kicker": "04 · Government schemes for our students",
+      "items": [
+        { "name": "PM POSHAN", "description": "Hot mid-day meal with eggs three days a week." },
+        { "name": "Free textbooks", "description": "Full set for every student at the start of the year." },
+        { "name": "Free uniforms", "description": "Two sets per student under Samagra Shiksha." },
+        { "name": "Scholarships", "description": "NMMS and pre-matric scholarships for eligible students." },
+        { "name": "PM SHRI", "description": "Funds for labs, digital classrooms and green campus." }
+      ]
+    },
+    "notices": { "kicker": "05 · Notice board", "count": 4, "link": { "label": "View all notices →", "href": "/notices" } },
+    "programs": { "kicker": "06 · Programs this year", "count": 3, "link": { "label": "All programs →", "href": "/programs" } },
+    "achievements": {
+      "kicker": "07 · Achievements",
+      "items": [
+        { "value": "97%", "text": "SSC pass rate, March 2026 (sample figure)" },
+        { "value": "11", "text": "Students scored 10/10 GPA in SSC 2026" },
+        { "value": "1st", "text": "Kabaddi (girls), Manchal mandal games 2025" }
+      ]
+    },
+    "gallery": {
+      "kicker": "08 · Campus gallery",
+      "items": [
+        { "src": "", "label": "Morning assembly" },
+        { "src": "", "label": "Digital classroom" },
+        { "src": "", "label": "Science lab" },
+        { "src": "", "label": "Library" },
+        { "src": "", "label": "Sports day" },
+        { "src": "", "label": "Bathukamma" },
+        { "src": "", "label": "Kitchen garden" },
+        { "src": "", "label": "Independence Day" }
+      ]
+    },
+    "admissions": {
+      "kicker": "09 · Admissions",
+      "title": "Admissions for 2027–28 open in June, with Badi Bata",
+      "text": "No fees at any stage. Mid-year admissions are also accepted for transfer students.",
+      "primaryCta": { "label": "Download admission form", "href": "#" },
+      "secondaryCta": { "label": "Ask the office", "href": "/contact" },
+      "stepsTitle": "How to apply",
+      "steps": [
+        "Collect the admission form from the office, or download it here.",
+        "Submit it with the documents to the class teacher.",
+        "Receive textbooks and uniforms on the first day."
+      ],
+      "documentsTitle": "Documents to bring",
+      "documents": [
+        "Transfer certificate from previous school",
+        "Birth certificate",
+        "Aadhaar card (student)",
+        "Caste / income certificate (for scholarships)"
+      ]
+    }
+  },
+  "about": {
+    "kicker": "About the school",
+    "title": "History, staff and results",
+    "timeline": [
+      { "year": "1970s", "text": "Opened as a Zilla Parishad high school for Arutla and nearby villages. (Placeholder — confirm year.)" },
+      { "year": "2010", "text": "English medium sections introduced alongside Telugu medium." },
+      { "year": "2020", "text": "Computer lab and first digital classroom set up." },
+      { "year": "2023", "text": "Selected as a PM SHRI school — Telangana Public School, Arutla." }
+    ],
+    "vision": { "title": "Vision", "text": "Every child in Arutla completes Class X — confident, curious and ready for what comes next." },
+    "mission": { "title": "Mission", "text": "Zero drop-outs between Class VI and X, every classroom digital by 2027, and a green, safe campus the village is proud of." },
+    "faculty": {
+      "title": "Faculty",
+      "columns": ["Name", "Designation", "Subject"],
+      "members": [
+        { "name": "Sri K. Srinivas Reddy", "designation": "Headmaster", "subject": "Mathematics" },
+        { "name": "Smt. P. Swapna", "designation": "School Assistant", "subject": "Mathematics" },
+        { "name": "Smt. K. Anitha", "designation": "School Assistant", "subject": "Physical Science" },
+        { "name": "Sri M. Venkatesh", "designation": "School Assistant", "subject": "Biological Science" },
+        { "name": "Smt. R. Padma", "designation": "School Assistant", "subject": "Telugu" },
+        { "name": "Sri T. Naresh", "designation": "School Assistant", "subject": "English" },
+        { "name": "Smt. S. Kavitha", "designation": "School Assistant", "subject": "Hindi" },
+        { "name": "Sri A. Yadagiri", "designation": "School Assistant", "subject": "Social Studies" },
+        { "name": "Sri B. Raju", "designation": "Physical Education Teacher", "subject": "Physical Education" },
+        { "name": "Smt. G. Sujatha", "designation": "Health & Wellness Ambassador", "subject": "Biological Science" }
+      ]
+    },
+    "results": {
+      "title": "SSC results",
+      "columns": ["Year", "Appeared", "Pass %", "10/10 GPA"],
+      "rows": [
+        { "year": "March 2026", "appeared": "84", "pass": "97%", "gpa10": "11" },
+        { "year": "March 2025", "appeared": "79", "pass": "95%", "gpa10": "8" },
+        { "year": "March 2024", "appeared": "81", "pass": "93%", "gpa10": "6" },
+        { "year": "March 2023", "appeared": "76", "pass": "91%", "gpa10": "4" }
+      ]
+    },
+    "downloads": {
+      "title": "Downloads",
+      "items": [
+        { "label": "Admission form 2027–28", "meta": "PDF · 120 KB", "href": "#" },
+        { "label": "Academic calendar 2026–27", "meta": "PDF · 340 KB", "href": "#" },
+        { "label": "Transfer certificate request", "meta": "PDF · 90 KB", "href": "#" },
+        { "label": "School Management Committee members", "meta": "PDF · 70 KB", "href": "#" },
+        { "label": "Annual report 2025–26", "meta": "PDF · 1.2 MB", "href": "#" }
+      ]
+    },
+    "disclosure": {
+      "title": "School information",
+      "items": [
+        { "label": "School name", "value": "ZPHS Arutla (PM SHRI)" },
+        { "label": "UDISE code", "value": "3605 0700 xxx" },
+        { "label": "Management", "value": "Zilla Parishad" },
+        { "label": "Type", "value": "Co-educational, day" },
+        { "label": "Classes", "value": "VI – X" },
+        { "label": "Medium", "value": "Telugu, English" },
+        { "label": "Board", "value": "BSE Telangana" },
+        { "label": "Mandal / District", "value": "Manchal / Ranga Reddy" }
+      ]
+    }
+  },
+  "programs": {
+    "kicker": "Programs · {count} running in 2026–27",
+    "title": "Learning beyond the textbook",
+    "allLabel": "All",
+    "categories": ["Academic", "Sports", "Cultural", "Environment", "Health"],
+    "coordinatorLabel": "Coordinator",
+    "emptyText": "No programs in this category yet."
+  },
+  "notices": {
+    "kicker": "Notice board · {count} notices",
+    "title": "Circulars, exams and holidays",
+    "searchPlaceholder": "Search notices",
+    "allLabel": "All",
+    "categories": ["General", "Exams", "Holidays", "Events", "Scholarships"],
+    "issuedBy": "by the Headmaster",
+    "downloadLabel": "Download circular (PDF)",
+    "emptyText": "No notices match your search.",
+    "newForDays": 7,
+    "calendar": {
+      "month": "2026-10",
+      "title": "October 2026",
+      "label": "Events",
+      "events": [
+        { "date": "2026-10-02", "title": "Gandhi Jayanti" },
+        { "date": "2026-10-03", "endDate": "2026-10-14", "title": "Bathukamma & Dasara holidays", "type": "holiday" },
+        { "date": "2026-10-17", "title": "FA-2 assessments begin" },
+        { "date": "2026-10-24", "title": "School science fair" },
+        { "date": "2026-10-31", "title": "Rashtriya Ekta Diwas run" }
+      ]
+    },
+    "academicCalendar": {
+      "title": "Academic calendar",
+      "links": [
+        { "label": "Academic calendar 2026–27 (PDF)", "href": "#" },
+        { "label": "FA / SA assessment schedule (PDF)", "href": "#" }
+      ]
+    }
+  },
+  "contact": {
+    "kicker": "Contact",
+    "title": "Write to the school office",
+    "intro": "Your message is sent to the headmaster's office. We reply within two working days.",
+    "subjects": ["General enquiry", "Admissions", "Transfer certificate", "Donation / alumni", "Complaint"],
+    "fields": {
+      "name": { "label": "Full name", "placeholder": "e.g. Lakshmi Devi" },
+      "phone": { "label": "Phone (optional)", "placeholder": "10-digit mobile" },
+      "email": { "label": "Email", "placeholder": "you@example.com" },
+      "subject": { "label": "Subject" },
+      "message": { "label": "Message", "placeholder": "How can we help?" }
+    },
+    "submitLabel": "Send message",
+    "errors": {
+      "required": "Please enter your name and a message.",
+      "email": "Please enter a valid email address so we can reply.",
+      "server": "Something went wrong. Please try again."
+    },
+    "success": {
+      "title": "Message sent",
+      "text": "Thank you. The school office will reply to your email within two working days.",
+      "againLabel": "Send another"
+    },
+    "info": [
+      { "label": "Address", "value": "ZPHS Arutla, Arutla, Manchal Mandal, Ranga Reddy, Telangana 501508" },
+      { "label": "Phone", "value": "+91 00000 00000 (placeholder)" },
+      { "label": "Email", "value": "hm.zphsarutla@example.gov.in" },
+      { "label": "Office hours", "value": "Mon – Sat, 9:00 am – 4:30 pm" }
+    ],
+    "map": {
+      "embedUrl": "",
+      "placeholder": "Google Maps embed · ZPHS Arutla, Manchal 501508",
+      "directionsLabel": "Get directions →",
+      "directionsUrl": "https://www.google.com/maps/search/?api=1&query=ZPHS+Arutla+Manchal"
+    }
+  },
+  "admin": {
+    "title": "Website administration",
+    "signInTitle": "Staff sign in",
+    "usernameLabel": "Username",
+    "passwordLabel": "Password",
+    "signInLabel": "Sign in",
+    "forgotText": "Forgot password? Contact the Mandal Educational Officer.",
+    "backLabel": "← Back to website",
+    "invalidLogin": "Incorrect username or password."
+  }
+}
