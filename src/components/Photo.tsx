@@ -13,7 +13,7 @@ type PhotoProps = {
 
 export function Photo({ src, alt, sizes, framed = false, className = "", style }: PhotoProps) {
   return (
-    <figure className={`photo duotone ${framed ? "blueprint" : "photo-bordered"} ${className}`} style={style}>
+    <figure className={`photo ${framed ? "blueprint" : "photo-bordered"} ${className}`} style={style}>
       <div className="photo-inner">
         {src ? (
           <Image src={src} alt={alt} fill sizes={sizes} style={{ objectFit: "cover" }} />

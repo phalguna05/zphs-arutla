@@ -76,7 +76,6 @@ figure { margin: 0; }
   position: relative;
   border: 1px solid var(--color-divider);
 }
-.blueprint.duotone { overflow: visible; }
 .blueprint > .corner {
   position: absolute;
   width: 11px;
@@ -92,16 +91,6 @@ figure { margin: 0; }
 .blueprint > .corner.tr { top: -6px; right: -6px; }
 .blueprint > .corner.bl { bottom: -6px; left: -6px; }
 .blueprint > .corner.br { bottom: -6px; right: -6px; }
-
-.duotone { position: relative; overflow: hidden; }
-.duotone::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: var(--color-accent);
-  mix-blend-mode: color;
-}
 
 .btn {
   display: inline-flex;
