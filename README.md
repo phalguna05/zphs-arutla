@@ -59,7 +59,9 @@ npm run dev
 3. *(Optional)* **Storage → Create → Blob** to enable admin photo/PDF uploads (adds `BLOB_READ_WRITE_TOKEN`).
 4. **Settings → Environment Variables**: add `ADMIN_USERNAME`, `ADMIN_PASSWORD`, `AUTH_SECRET`
    (generate with `openssl rand -base64 32`).
-5. Deploy. The `vercel-build` script runs migrations before building.
+5. Deploy. The `vercel-build` script applies migrations before building. Without a database it
+   skips them and the site runs on mock data, so you can deploy first and connect Postgres later
+   (redeploy after adding `DATABASE_URL`).
 6. Seed once from your machine: `vercel env pull .env.local && npm run db:seed`.
 
 ## Changing the database schema

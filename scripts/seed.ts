@@ -1,11 +1,13 @@
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 import { messages, notices, programs, visitDays } from "../src/db/schema";
+import { databaseUrl } from "../src/db/url";
 import { todayISO } from "../src/lib/dates";
 import { buildMockData } from "../src/lib/mock-data";
 
 async function main() {
-  const pool = new Pool({ connectionString: process.env.DATABASE_URL });
+  if (!databaseUrl) throw new Error("Set DATABASE_URL (e.g. in .env.local) before seeding.");
+  const pool = new Pool({ connectionString: databaseUrl });
   const db = drizzle(pool);
   const force = process.argv.includes("--force");
 
