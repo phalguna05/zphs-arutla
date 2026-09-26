@@ -3,9 +3,10 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-import { requireAdmin } from "@/lib/auth";
+import { normalizeUsername, isOwnerUsername, requireAdmin } from "@/lib/auth";
 import { content } from "@/lib/content";
 import { todayISO } from "@/lib/dates";
+import { hashPassword } from "@/lib/password";
 import { store } from "@/lib/store";
 import { uploadFiles } from "@/lib/upload";
 
@@ -106,4 +107,78 @@ export async function removeMessage(id: number) {
   await store.removeMessage(id);
   revalidatePath("/admin");
   redirect("/admin?tab=inbox&done=message-removed");
+}
+
+const staffSchema = z.object({
+  prefix: z.enum(["", ...content.about.faculty.prefixes] as [string, ...string[]]),
+  name: z.string().trim().min(1),
+  designation: z.string().trim().min(1),
+  subject: z.string().trim(),
+});
+
+export async function saveStaff(_: FormState, formData: FormData): Promise<FormState> {
+  await requireAdmin();
+  const parsed = staffSchema.safeParse(Object.fromEntries(formData));
+  if (!parsed.success) return failure("Name and designation are required.", formData);
+  const id = Number(formData.get("id"));
+  if (id) {
+    await store.updateStaff(id, parsed.data);
+    revalidatePath("/about");
+    revalidatePath("/admin");
+    redirect("/admin?tab=staff&done=staff-updated");
+  }
+  await store.addStaff(parsed.data);
+  revalidatePath("/about");
+  revalidatePath("/admin");
+  redirect("/admin?tab=staff&done=staff-added");
+}
+
+export async function moveStaff(id: number, direction: "up" | "down") {
+  await requireAdmin();
+  await store.moveStaff(id, direction);
+  revalidatePath("/about");
+  revalidatePath("/admin");
+  redirect("/admin?tab=staff");
+}
+
+export async function removeStaff(id: number) {
+  await requireAdmin();
+  await store.removeStaff(id);
+  revalidatePath("/about");
+  revalidatePath("/admin");
+  redirect("/admin?tab=staff&done=staff-removed");
+}
+
+const adminUserSchema = z
+  .object({
+    username: z
+      .string()
+      .transform(normalizeUsername)
+      .pipe(z.string().regex(/^[a-z0-9._-]{3,32}$/, "Username must be 3–32 characters: letters, numbers, dot, dash or underscore.")),
+    password: z.string().min(8, "Password must be at least 8 characters."),
+    confirm: z.string(),
+  })
+  .refine((v) => v.password === v.confirm, { message: "Passwords do not match.", path: ["confirm"] });
+
+export async function addAdminUser(_: FormState, formData: FormData): Promise<FormState> {
+  await requireAdmin();
+  const parsed = adminUserSchema.safeParse(Object.fromEntries(formData));
+  const values = { username: String(formData.get("username") ?? "") };
+  if (!parsed.success) return { error: parsed.error.issues[0].message, values };
+  const { username, password } = parsed.data;
+  if (isOwnerUsername(username) || (await store.findAdminUser(username))) {
+    return { error: "That username is already taken.", values };
+  }
+  await store.addAdminUser({ username, passwordHash: await hashPassword(password) });
+  revalidatePath("/admin");
+  redirect("/admin?tab=admins&done=admin-added");
+}
+
+export async function removeAdminUser(id: number) {
+  const session = await requireAdmin();
+  const users = await store.listAdminUsers();
+  if (users.find((u) => u.id === id)?.username === session.username) redirect("/admin?tab=admins&done=admin-self");
+  await store.removeAdminUser(id);
+  revalidatePath("/admin");
+  redirect("/admin?tab=admins&done=admin-removed");
 }

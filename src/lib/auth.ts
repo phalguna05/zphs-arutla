@@ -3,6 +3,8 @@ import { timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { jwtVerify, SignJWT } from "jose";
+import { verifyPassword } from "./password";
+import { store } from "./store";
 
 const COOKIE = "admin_session";
 const MAX_AGE = 60 * 60 * 8;
@@ -24,15 +26,32 @@ function safeEqual(a: string, b: string) {
   return left.length === right.length && timingSafeEqual(left, right);
 }
 
-export function checkCredentials(username: string, password: string) {
-  const expectedUser = process.env.ADMIN_USERNAME || (isDev ? DEV_DEFAULTS.username : undefined);
-  const expectedPass = process.env.ADMIN_PASSWORD || (isDev ? DEV_DEFAULTS.password : undefined);
-  if (!expectedUser || !expectedPass) return false;
-  return safeEqual(username, expectedUser) && safeEqual(password, expectedPass);
+export type AccountKind = "owner" | "user";
+export type Session = { username: string; kind: AccountKind };
+
+export const normalizeUsername = (username: string) => username.trim().toLowerCase();
+
+/** The owner account comes from ADMIN_USERNAME / ADMIN_PASSWORD and always works, so admins can never be locked out. */
+function ownerAccount() {
+  const username = process.env.ADMIN_USERNAME || (isDev ? DEV_DEFAULTS.username : undefined);
+  const password = process.env.ADMIN_PASSWORD || (isDev ? DEV_DEFAULTS.password : undefined);
+  return username && password ? { username: normalizeUsername(username), password } : null;
 }
 
-export async function createSession(username: string) {
-  const token = await new SignJWT({ sub: username })
+export const ownerUsername = () => ownerAccount()?.username ?? null;
+export const isOwnerUsername = (username: string) => ownerUsername() === normalizeUsername(username);
+
+export async function checkCredentials(rawUsername: string, password: string): Promise<AccountKind | null> {
+  const username = normalizeUsername(rawUsername);
+  const owner = ownerAccount();
+  if (owner && safeEqual(username, owner.username) && safeEqual(password, owner.password)) return "owner";
+  const user = await store.findAdminUser(username);
+  if (user && (await verifyPassword(password, user.passwordHash))) return "user";
+  return null;
+}
+
+export async function createSession(username: string, kind: AccountKind) {
+  const token = await new SignJWT({ sub: normalizeUsername(username), kind })
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
     .setExpirationTime(`${MAX_AGE}s`)
@@ -55,7 +74,11 @@ export async function getSession() {
   if (!token) return null;
   try {
     const { payload } = await jwtVerify(token, secret());
-    return { username: String(payload.sub) };
+    const session: Session = { username: String(payload.sub), kind: payload.kind === "user" ? "user" : "owner" };
+    if (session.kind === "owner" ? !isOwnerUsername(session.username) : !(await store.findAdminUser(session.username))) {
+      return null;
+    }
+    return session;
   } catch {
     return null;
   }

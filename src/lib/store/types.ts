@@ -1,10 +1,12 @@
-import type { Message, Notice, Program } from "@/db/schema";
+import type { AdminUser, Message, Notice, Program, StaffMember } from "@/db/schema";
 
-export type { Message, Notice, Program };
+export type { AdminUser, Message, Notice, Program, StaffMember };
 
 export type NewProgram = Pick<Program, "name" | "category" | "duration" | "coordinator" | "description" | "images">;
 export type NewNotice = Pick<Notice, "title" | "category" | "date" | "pinned" | "body" | "attachmentUrl">;
 export type NewMessage = Pick<Message, "name" | "email" | "phone" | "subject" | "message">;
+export type NewStaffMember = Pick<StaffMember, "prefix" | "name" | "designation" | "subject">;
+export type NewAdminUser = Pick<AdminUser, "username" | "passwordHash">;
 export type VisitorStats = { total: number; today: number; online: number };
 
 export interface Store {
@@ -18,7 +20,16 @@ export interface Store {
   listMessages(): Promise<Message[]>;
   addMessage(input: NewMessage): Promise<void>;
   removeMessage(id: number): Promise<void>;
-  counts(): Promise<{ programs: number; notices: number; messages: number }>;
+  listStaff(): Promise<StaffMember[]>;
+  addStaff(input: NewStaffMember): Promise<void>;
+  updateStaff(id: number, input: NewStaffMember): Promise<void>;
+  moveStaff(id: number, direction: "up" | "down"): Promise<void>;
+  removeStaff(id: number): Promise<void>;
+  listAdminUsers(): Promise<AdminUser[]>;
+  findAdminUser(username: string): Promise<AdminUser | undefined>;
+  addAdminUser(input: NewAdminUser): Promise<void>;
+  removeAdminUser(id: number): Promise<void>;
+  counts(): Promise<{ programs: number; notices: number; messages: number; staff: number }>;
   visits(today: string): Promise<{ total: number; today: number; online: number }>;
   recordVisit(sessionId: string, isNewVisit: boolean, today: string): Promise<void>;
 }

@@ -20,6 +20,8 @@ export async function getNotices(limit?: number) {
 
 export const getPrograms = (limit?: number) => store.listPrograms(limit);
 export const getMessages = () => store.listMessages();
+export const getStaff = () => store.listStaff();
+export const getAdminUsers = () => store.listAdminUsers();
 export const getCounts = () => store.counts();
 
 export async function getVisitorStats(): Promise<VisitorStats> {

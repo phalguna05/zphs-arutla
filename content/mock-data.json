@@ -51,6 +51,7 @@
       "message": "Does the school offer any coaching for the NMMS exam? My daughter is in Class VIII."
     }
   ],
+  "staff": [],
   "visits": {
     "note": "Daily visit counts, most recent first (index 0 = today).",
     "daily": [

@@ -8,6 +8,27 @@
       "when": 1790316941680,
       "tag": "0000_init",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1790445875749,
+      "tag": "0001_staff",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790446838565,
+      "tag": "0002_admin_users",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1790448845675,
+      "tag": "0003_staff_order",
+      "breakpoints": true
     }
   ]
 }

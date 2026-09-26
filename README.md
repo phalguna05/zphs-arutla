@@ -21,8 +21,13 @@ Put the file in `public/images/` and set its path in `site.json`, e.g.
 `"home.hero.image.src": "/images/school-building.jpg"`. Empty `src` shows a placeholder frame.
 Gallery items work the same way (`home.gallery.items[].src`).
 
+### Admin accounts
+The owner account comes from `ADMIN_USERNAME` / `ADMIN_PASSWORD` and always works. Signed in, go to
+**Admin → Admins** to add more accounts; they are stored in the `admin_users` table with scrypt-hashed
+passwords and can sign in from any device. Usernames are case-insensitive.
+
 ### Programs and notices
-Sign in at `/admin/login` with `ADMIN_USERNAME` / `ADMIN_PASSWORD`. From the dashboard you can
+Sign in at `/admin/login`. From the dashboard you can
 publish/remove programs (with up to 3 photos) and notices (with an optional PDF circular),
 and read contact-form messages. Photo/PDF uploads use Vercel Blob and are enabled when
 `BLOB_READ_WRITE_TOKEN` is set.

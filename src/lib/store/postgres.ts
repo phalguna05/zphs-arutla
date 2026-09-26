@@ -1,6 +1,6 @@
-import { count, desc, eq, gt, sql, sum } from "drizzle-orm";
+import { asc, count, desc, eq, gt, max, sql, sum } from "drizzle-orm";
 import { db } from "@/db";
-import { messages, notices, programs, visitDays, visitorSessions } from "@/db/schema";
+import { adminUsers, messages, notices, programs, staff, visitDays, visitorSessions } from "@/db/schema";
 import type { Store } from "./types";
 
 const ONLINE_WINDOW = sql`now() - interval '2 minutes'`;
@@ -40,13 +40,55 @@ export const postgresStore: Store = {
     await db.delete(messages).where(eq(messages.id, id));
   },
 
+  async listStaff() {
+    return db.select().from(staff).orderBy(asc(staff.sortOrder), asc(staff.id));
+  },
+  async addStaff(input) {
+    const [{ value }] = await db.select({ value: max(staff.sortOrder) }).from(staff);
+    await db.insert(staff).values({ ...input, sortOrder: (value ?? 0) + 1 });
+  },
+  async updateStaff(id, input) {
+    await db.update(staff).set(input).where(eq(staff.id, id));
+  },
+  async moveStaff(id, direction) {
+    await db.transaction(async (tx) => {
+      const rows = await tx.select({ id: staff.id }).from(staff).orderBy(asc(staff.sortOrder), asc(staff.id));
+      const ids = rows.map((r) => r.id);
+      const from = ids.indexOf(id);
+      const to = direction === "up" ? from - 1 : from + 1;
+      if (from < 0 || to < 0 || to >= ids.length) return;
+      [ids[from], ids[to]] = [ids[to], ids[from]];
+      for (const [i, rowId] of ids.entries()) {
+        await tx.update(staff).set({ sortOrder: i + 1 }).where(eq(staff.id, rowId));
+      }
+    });
+  },
+  async removeStaff(id) {
+    await db.delete(staff).where(eq(staff.id, id));
+  },
+
+  async listAdminUsers() {
+    return db.select().from(adminUsers).orderBy(asc(adminUsers.createdAt), asc(adminUsers.id));
+  },
+  async findAdminUser(username) {
+    const [user] = await db.select().from(adminUsers).where(eq(adminUsers.username, username)).limit(1);
+    return user;
+  },
+  async addAdminUser(input) {
+    await db.insert(adminUsers).values(input);
+  },
+  async removeAdminUser(id) {
+    await db.delete(adminUsers).where(eq(adminUsers.id, id));
+  },
+
   async counts() {
-    const [[p], [n], [m]] = await Promise.all([
+    const [[p], [n], [m], [s]] = await Promise.all([
       db.select({ value: count() }).from(programs),
       db.select({ value: count() }).from(notices),
       db.select({ value: count() }).from(messages),
+      db.select({ value: count() }).from(staff),
     ]);
-    return { programs: p.value, notices: n.value, messages: m.value };
+    return { programs: p.value, notices: n.value, messages: m.value, staff: s.value };
   },
 
   async visits(today) {

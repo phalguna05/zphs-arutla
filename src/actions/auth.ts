@@ -9,8 +9,9 @@ export type SignInState = { error?: string; username?: string };
 export async function signIn(_: SignInState, formData: FormData): Promise<SignInState> {
   const username = String(formData.get("username") ?? "").trim();
   const password = String(formData.get("password") ?? "");
-  if (!checkCredentials(username, password)) return { error: content.admin.invalidLogin, username };
-  await createSession(username);
+  const kind = await checkCredentials(username, password);
+  if (!kind) return { error: content.admin.invalidLogin, username };
+  await createSession(username, kind);
   redirect("/admin");
 }
 

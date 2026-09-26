@@ -4,11 +4,14 @@ import { FileDownIcon } from "@/components/Icons";
 import { PageIntro } from "@/components/PageIntro";
 import { SectionHead } from "@/components/SectionHead";
 import { content } from "@/lib/content";
+import { getStaff } from "@/lib/data";
 
 export const metadata: Metadata = { title: "About" };
+export const dynamic = "force-dynamic";
 
-export default function AboutPage() {
+export default async function AboutPage() {
   const { about } = content;
+  const staff = await getStaff();
   return (
     <>
       <PageIntro kicker={about.kicker} title={about.title} />
@@ -43,7 +46,12 @@ export default function AboutPage() {
           <div className="stack-12">
             <span className="label-dark">{about.campus.institutionsTitle}</span>
             {about.campus.institutions.map((item) => (
-              <span key={item} className="adm-doc">{item}</span>
+              <div key={item.name} className="adm-doc institution">
+                <span>{item.name}</span>
+                {"students" in item && item.students !== undefined && (
+                  <span className="institution-count">{item.students.toLocaleString("en-IN")} students</span>
+                )}
+              </div>
             ))}
           </div>
         </div>
@@ -66,15 +74,16 @@ export default function AboutPage() {
                 <tr>{about.faculty.columns.map((c) => <th key={c}>{c}</th>)}</tr>
               </thead>
               <tbody>
-                {about.faculty.members.map((m) => (
-                  <tr key={m.name}>
-                    <td className="strong">{m.name}</td>
+                {staff.map((m) => (
+                  <tr key={m.id}>
+                    <td className="strong">{[m.prefix, m.name].filter(Boolean).join(" ")}</td>
                     <td>{m.designation}</td>
                     <td>{m.subject}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
+            {!staff.length && <p className="text-soft small-15 pad-top-8">{about.faculty.emptyText}</p>}
           </div>
         </div>
         <div className="stack-16">

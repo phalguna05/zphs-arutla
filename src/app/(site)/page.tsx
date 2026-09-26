@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Corners } from "@/components/Corners";
 import { DateBadge } from "@/components/DateBadge";
+import { HeroCarousel } from "@/components/HeroCarousel";
 import { NoticeTicker } from "@/components/NoticeTicker";
 import { Photo } from "@/components/Photo";
 import { SectionHead } from "@/components/SectionHead";
@@ -33,7 +34,7 @@ export default async function HomePage() {
             </Link>
           </div>
         </div>
-        <Photo framed src={home.hero.image.src} alt={home.hero.image.alt} sizes="(max-width: 900px) 100vw, 580px" className="ratio-4-3" />
+        <HeroCarousel slides={home.hero.images} />
       </section>
 
       <section className="container section-tight">
@@ -59,10 +60,16 @@ export default async function HomePage() {
         </div>
         <div className="blueprint hm-card">
           <Corners />
+          <Photo src={home.headmaster.image.src} alt={home.headmaster.image.alt} sizes="120px" className="hm-photo" />
           <div className="stack-12">
             <span className="kicker">{home.headmaster.kicker}</span>
             <p className="quote">{home.headmaster.quote}</p>
-            <span className="text-soft small">{home.headmaster.name}</span>
+            <div className="hm-sign">
+              <span className="strong">{home.headmaster.name}</span>
+              {home.headmaster.titles.map((title) => (
+                <span key={title} className="text-soft small">{title}</span>
+              ))}
+            </div>
           </div>
         </div>
       </section>

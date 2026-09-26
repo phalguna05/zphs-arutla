@@ -16,7 +16,7 @@ export default async function LoginPage() {
       <div className="blueprint login-card">
         <Corners />
         <div className="login-brand">
-          <img src={school.logo} alt={school.logoAlt} width={44} height={44} className="logo-tile" />
+          <img src={school.icon} alt={school.logoAlt} width={44} height={44} className="logo-tile" />
           <div className="stack-2">
             <span className="login-school">{school.shortName}</span>
             <span className="text-soft small-13">{admin.title}</span>

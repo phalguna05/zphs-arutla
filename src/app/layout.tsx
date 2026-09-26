@@ -11,7 +11,7 @@ import "./site.css";
 export const metadata: Metadata = {
   title: { default: content.seo.title, template: `%s · ${content.school.shortName}` },
   description: content.seo.description,
-  icons: { icon: content.school.logo },
+  icons: { icon: content.school.icon },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

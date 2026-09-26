@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { removeMessage, removeNotice, removeProgram } from "@/actions/admin";
+import { moveStaff, removeAdminUser, removeMessage, removeNotice, removeProgram, removeStaff } from "@/actions/admin";
 import { signOut } from "@/actions/auth";
 import { AdminOnline, AdminVisitorStats } from "@/components/admin/AdminVisitors";
+import { AdminUserForm } from "@/components/admin/AdminUserForm";
 import { NoticeForm } from "@/components/admin/NoticeForm";
 import { ProgramForm } from "@/components/admin/ProgramForm";
 import { RemoveButton } from "@/components/admin/RemoveButton";
+import { StaffForm } from "@/components/admin/StaffForm";
 import { Corners } from "@/components/Corners";
-import { requireAdmin } from "@/lib/auth";
+import { ownerUsername, requireAdmin, type Session } from "@/lib/auth";
 import { content } from "@/lib/content";
-import { getCounts, getMessages, getNotices, getPrograms, getVisitorStats, isMockData } from "@/lib/data";
+import { getAdminUsers, getCounts, getMessages, getNotices, getPrograms, getStaff, getVisitorStats, isMockData } from "@/lib/data";
 import { formatTimestamp, todayISO } from "@/lib/dates";
 import { uploadsEnabled } from "@/lib/upload";
 
@@ -19,7 +21,9 @@ export const dynamic = "force-dynamic";
 const TABS = [
   { key: "programs", label: "Programs" },
   { key: "notices", label: "Notice board" },
+  { key: "staff", label: "Staff" },
   { key: "inbox", label: "Inbox" },
+  { key: "admins", label: "Admins" },
 ] as const;
 
 type Tab = (typeof TABS)[number]["key"];
@@ -30,23 +34,36 @@ const DONE_MESSAGES: Record<string, string> = {
   "notice-added": "Notice published to the notice board",
   "notice-removed": "Notice removed from the board",
   "message-removed": "Message deleted",
+  "staff-added": "Staff member added to the About page",
+  "staff-removed": "Staff member removed",
+  "staff-updated": "Staff details updated",
+  "admin-added": "Admin added — they can sign in now",
+  "admin-removed": "Admin removed",
+  "admin-self": "You can\u2019t remove the account you are signed in with",
 };
 
-export default async function AdminPage({ searchParams }: { searchParams: Promise<{ tab?: string; done?: string }> }) {
-  await requireAdmin();
+export default async function AdminPage({ searchParams }: { searchParams: Promise<{ tab?: string; done?: string; edit?: string }> }) {
+  const session = await requireAdmin();
   const params = await searchParams;
   const tab: Tab = TABS.some((t) => t.key === params.tab) ? (params.tab as Tab) : "programs";
   const toast = params.done ? DONE_MESSAGES[params.done] : undefined;
 
-  const [counts, visitors] = await Promise.all([getCounts(), getVisitorStats()]);
-  const tabCounts: Record<Tab, number> = { programs: counts.programs, notices: counts.notices, inbox: counts.messages };
+  const [counts, visitors, adminUsers] = await Promise.all([getCounts(), getVisitorStats(), getAdminUsers()]);
+  const tabCounts: Record<Tab, number> = {
+    programs: counts.programs,
+    notices: counts.notices,
+    staff: counts.staff,
+    inbox: counts.messages,
+    admins: adminUsers.length + (ownerUsername() ? 1 : 0),
+  };
   const canUpload = uploadsEnabled();
 
   return (
     <div className="admin">
       <div className="admin-bar">
-        <img src={content.school.logo} alt={content.school.logoAlt} width={32} height={32} className="logo-tile" />
+        <img src={content.school.icon} alt={content.school.logoAlt} width={32} height={32} className="logo-tile" />
         <span className="admin-bar-title">{content.school.shortName} · Admin</span>
+        <span className="small-14 admin-user">Signed in as {session.username}</span>
         <AdminOnline />
         <Link href="/" className="small-14">View site</Link>
         <form action={signOut}>
@@ -93,7 +110,9 @@ export default async function AdminPage({ searchParams }: { searchParams: Promis
 
           {tab === "programs" && <ProgramsTab canUpload={canUpload} />}
           {tab === "notices" && <NoticesTab canUpload={canUpload} />}
+          {tab === "staff" && <StaffTab editId={Number(params.edit) || undefined} />}
           {tab === "inbox" && <InboxTab />}
+          {tab === "admins" && <AdminsTab session={session} />}
         </div>
       </div>
     </div>
@@ -171,6 +190,107 @@ async function NoticesTab({ canUpload }: { canUpload: boolean }) {
         </div>
       </div>
       <NoticeForm today={todayISO()} uploadsEnabled={canUpload} />
+    </div>
+  );
+}
+
+async function StaffTab({ editId }: { editId?: number }) {
+  const staff = await getStaff();
+  const editing = staff.find((m) => m.id === editId);
+  return (
+    <div className="admin-split">
+      <div className="stack-14">
+        <h2 className="admin-h2">Staff on the About page</h2>
+        <p className="text-soft small-14">Shown on the About page in this order. Use the arrows to move someone up or down.</p>
+        <div className="table-scroll">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Designation</th>
+                <th>Subject</th>
+                <th className="align-right">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {staff.map((m, i) => (
+                <tr key={m.id} className={m.id === editing?.id ? "row-editing" : undefined}>
+                  <td className="strong">{[m.prefix, m.name].filter(Boolean).join(" ")}</td>
+                  <td>{m.designation}</td>
+                  <td>{m.subject}</td>
+                  <td className="align-right nowrap">
+                    <div className="row-actions">
+                      <form action={moveStaff.bind(null, m.id, "up")}>
+                        <button type="submit" className="btn btn-ghost btn-order" disabled={i === 0} aria-label={`Move ${m.name} up`}>↑</button>
+                      </form>
+                      <form action={moveStaff.bind(null, m.id, "down")}>
+                        <button type="submit" className="btn btn-ghost btn-order" disabled={i === staff.length - 1} aria-label={`Move ${m.name} down`}>↓</button>
+                      </form>
+                      <Link href={`/admin?tab=staff&edit=${m.id}`} className="btn btn-ghost small-13">Edit</Link>
+                      <RemoveButton onConfirm={removeStaff.bind(null, m.id)} />
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {!staff.length && <p className="text-soft small-15">No staff added yet.</p>}
+      </div>
+      <StaffForm member={editing} />
+    </div>
+  );
+}
+
+async function AdminsTab({ session }: { session: Session }) {
+  const users = await getAdminUsers();
+  const owner = ownerUsername();
+  return (
+    <div className="admin-split">
+      <div className="stack-14">
+        <h2 className="admin-h2">Admin accounts</h2>
+        <p className="text-soft small-14">
+          Everyone listed here can sign in to this dashboard. The owner account is set with ADMIN_USERNAME and
+          ADMIN_PASSWORD in the environment and always works.
+        </p>
+        <div className="table-scroll">
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Added</th>
+                <th className="align-right">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {owner && (
+                <tr>
+                  <td className="strong">
+                    {owner}
+                    <span className="tag tag-outline tag-inline">Owner</span>
+                    {session.kind === "owner" && <span className="tag tag-accent tag-inline">You</span>}
+                  </td>
+                  <td className="text-soft">Environment</td>
+                  <td />
+                </tr>
+              )}
+              {users.map((u) => (
+                <tr key={u.id}>
+                  <td className="strong">
+                    {u.username}
+                    {u.username === session.username && <span className="tag tag-accent tag-inline">You</span>}
+                  </td>
+                  <td>{formatTimestamp(u.createdAt)}</td>
+                  <td className="align-right nowrap">
+                    {u.username !== session.username && <RemoveButton onConfirm={removeAdminUser.bind(null, u.id)} />}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <AdminUserForm />
     </div>
   );
 }

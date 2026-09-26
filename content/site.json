@@ -2,10 +2,14 @@
   "school": {
     "name": "PM SHRI ZPHS Arutla",
     "shortName": "ZPHS Arutla",
-    "tagline": "Telangana Public School, Arutla",
-    "logo": "/images/pmshri-logo.jpeg",
+    "tagline": "Part of Telangana Public School, Arutla",
+    "logo": "/images/pm-shri-logo.png",
+    "icon": "/images/pmshri-logo.jpeg",
     "logoAlt": "PM SHRI logo",
-    "partnerLogo": { "src": "/images/telangana-rising.png", "alt": "Telangana Rising" },
+    "partnerLogo": {
+      "src": "/images/telangana-rising.png",
+      "alt": "Telangana Rising"
+    },
     "timezone": "Asia/Kolkata"
   },
   "seo": {
@@ -14,7 +18,7 @@
   },
   "topBar": {
     "department": "Government of Telangana · School Education Department · Samagra Shiksha",
-    "items": ["UDISE 3605 0700 xxx", "English medium"],
+    "items": ["UDISE 36231002111", "English medium"],
     "staffLoginLabel": "Admin login"
   },
   "nav": [
@@ -29,7 +33,7 @@
       "ZPHS Arutla, Arutla, Manchal Mandal,",
       "Ranga Reddy District, Telangana 501508"
     ],
-    "officeHours": "Office: Mon–Sat, 9:00 am – 4:30 pm",
+    "officeHours": "Office: Mon–Sat, 9:00 am – 4:15 pm",
     "quickLinksTitle": "Quick links",
     "quickLinks": [
       { "label": "About & staff", "href": "/about" },
@@ -74,10 +78,48 @@
       "text": "Zilla Parishad High School, Arutla is a free government school in Manchal Mandal, upgraded under the PM SHRI scheme with digital classrooms, science and computer labs, and a kitchen garden that feeds our mid-day meal.",
       "primaryCta": { "label": "Admissions 2027–28", "href": "#admissions" },
       "secondaryCta": { "label": "Notice board", "href": "/notices" },
-      "image": {
-        "src": "/images/school_photo.jpeg",
-        "alt": "Photo of the school building"
-      }
+      "images": [
+        {
+          "src": "/images/school_photo.jpeg",
+          "alt": "Photo of the school building"
+        },
+        {
+          "src": "/images/hero/inauguration.jpg",
+          "alt": "Chief Minister Sri A. Revanth Reddy inaugurating Telangana Public School, Arutla"
+        },
+        {
+          "src": "/images/hero/campus-aerial.jpg",
+          "alt": "Aerial view of the campus, sports ground and courts"
+        },
+        {
+          "src": "/images/hero/cm-dining-hall.jpg",
+          "alt": "The Chief Minister having breakfast with students in the dining hall"
+        },
+        {
+          "src": "/images/hero/inauguration-group.jpg",
+          "alt": "Inauguration day with parents, teachers and the School Development and Management Committee"
+        },
+        {
+          "src": "/images/hero/cm-library.jpg",
+          "alt": "The Chief Minister visiting the school library"
+        },
+        {
+          "src": "/images/hero/cm-students-stage.jpg",
+          "alt": "The Chief Minister on stage with students, parents and officials on inauguration day"
+        },
+        {
+          "src": "/images/hero/tree-planting.jpg",
+          "alt": "Planting a sapling on inauguration day"
+        },
+        {
+          "src": "/images/hero/cm-school-bus.jpg",
+          "alt": "The Chief Minister with a Telangana Public School bus"
+        },
+        {
+          "src": "/images/hero/cm-inside-bus.jpg",
+          "alt": "The Chief Minister riding in a school bus"
+        }
+      ]
     },
     "facts": [
       { "label": "Classes", "value": "VI – X" },
@@ -99,7 +141,15 @@
     "headmaster": {
       "kicker": "Headmaster's message",
       "quote": "“A government school should be the best school in the village. That is the standard we hold ourselves to, every day.”",
-      "name": "Sri S. Giridar, Headmaster"
+      "name": "Sri S. Giridar",
+      "titles": [
+        "Gazetted Headmaster",
+        "Head of the Institution of Telangana Public School"
+      ],
+      "image": {
+        "src": "/images/headmaster.jpg",
+        "alt": "Sri S. Giridar, Headmaster"
+      }
     },
     "academics": {
       "kicker": "02 · Academics",
@@ -277,6 +327,10 @@
       {
         "year": "2025–26",
         "text": "Campus enrolment more than doubles to 1,585 students after a ₹10.91 crore upgrade."
+      },
+      {
+        "year": "2026-27",
+        "text": "Enrolment has grown to 2,036 since the campus was inaugurated by the Hon'ble Chief Minister of Telangana."
       }
     ],
     "vision": {
@@ -302,69 +356,18 @@
       ],
       "institutionsTitle": "On the campus",
       "institutions": [
-        "MPPS, Arutla",
-        "PM SHRI ZPHS, Arutla",
-        "ZPHS (Girls), Arutla",
-        "Telangana Model School, Arutla",
-        "Two Anganwadi centres",
-        "Girls' hostel and boys' hostel"
+        { "name": "MPPS, Arutla", "students": 666 },
+        { "name": "PM SHRI ZPHS, Arutla", "students": 441 },
+        { "name": "Pre-primary school", "students": 204 },
+        { "name": "Telangana Model School, Arutla", "students": 725 },
+        { "name": "Girls' hostel and boys' hostel" }
       ]
     },
     "faculty": {
       "title": "Faculty",
       "columns": ["Name", "Designation", "Subject"],
-      "members": [
-        {
-          "name": "Sri K. Srinivas Reddy",
-          "designation": "Headmaster",
-          "subject": "Mathematics"
-        },
-        {
-          "name": "Smt. P. Swapna",
-          "designation": "School Assistant",
-          "subject": "Mathematics"
-        },
-        {
-          "name": "Smt. K. Anitha",
-          "designation": "School Assistant",
-          "subject": "Physical Science"
-        },
-        {
-          "name": "Sri M. Venkatesh",
-          "designation": "School Assistant",
-          "subject": "Biological Science"
-        },
-        {
-          "name": "Smt. R. Padma",
-          "designation": "School Assistant",
-          "subject": "Telugu"
-        },
-        {
-          "name": "Sri T. Naresh",
-          "designation": "School Assistant",
-          "subject": "English"
-        },
-        {
-          "name": "Smt. S. Kavitha",
-          "designation": "School Assistant",
-          "subject": "Hindi"
-        },
-        {
-          "name": "Sri A. Yadagiri",
-          "designation": "School Assistant",
-          "subject": "Social Studies"
-        },
-        {
-          "name": "Sri B. Raju",
-          "designation": "Physical Education Teacher",
-          "subject": "Physical Education"
-        },
-        {
-          "name": "Smt. G. Sujatha",
-          "designation": "Health & Wellness Ambassador",
-          "subject": "Biological Science"
-        }
-      ]
+      "prefixes": ["Sri", "Smt.", "Kum.", "Dr."],
+      "emptyText": "Staff details will be listed here soon."
     },
     "results": {
       "title": "SSC results",
@@ -415,7 +418,7 @@
       "title": "School information",
       "items": [
         { "label": "School name", "value": "ZPHS Arutla (PM SHRI)" },
-        { "label": "UDISE code", "value": "3605 0700 xxx" },
+        { "label": "UDISE code", "value": "36231002111" },
         { "label": "Management", "value": "Zilla Parishad" },
         { "label": "Type", "value": "Co-educational, day" },
         { "label": "Classes", "value": "VI – X" },
@@ -509,7 +512,7 @@
       },
       { "label": "Phone", "value": "+91 9441076374" },
       { "label": "Email", "value": "zphsarutla@gmail.com" },
-      { "label": "Office hours", "value": "Mon – Sat, 9:00 am – 4:30 pm" }
+      { "label": "Office hours", "value": "Mon – Sat, 9:00 am – 4:15 pm" }
     ],
     "map": {
       "embedUrl": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3812.794514245662!2d78.75298797539773!3d17.13151988371263!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb05da52205e6b%3A0xa33626ca2a313092!2sZPHS%20Arutla!5e0!3m2!1sen!2sus!4v1790399503347!5m2!1sen!2sus",
@@ -520,11 +523,11 @@
   },
   "admin": {
     "title": "Website administration",
-    "signInTitle": "Staff sign in",
+    "signInTitle": "Admin sign in",
     "usernameLabel": "Username",
     "passwordLabel": "Password",
     "signInLabel": "Sign in",
-    "forgotText": "Forgot password? Contact the Mandal Educational Officer.",
+    "forgotText": "Forgot password? Contact Admin.",
     "backLabel": "← Back to website",
     "invalidLogin": "Incorrect username or password."
   }

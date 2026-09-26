@@ -1,11 +1,17 @@
 import mock from "@content/mock-data.json";
-import type { NewMessage, NewNotice, NewProgram } from "./store/types";
+import type { NewMessage, NewNotice, NewProgram, NewStaffMember } from "./store/types";
 
 type MockProgram = Omit<NewProgram, "images">;
 type MockNotice = Omit<NewNotice, "date" | "attachmentUrl"> & { daysAgo: number };
 type MockMessage = NewMessage & { daysAgo: number };
 
-const data = mock as { programs: MockProgram[]; notices: MockNotice[]; messages: MockMessage[]; visits: { daily: number[] } };
+const data = mock as {
+  programs: MockProgram[];
+  notices: MockNotice[];
+  messages: MockMessage[];
+  staff?: NewStaffMember[];
+  visits: { daily: number[] };
+};
 
 function isoDaysAgo(today: string, days: number) {
   const d = new Date(`${today}T00:00:00Z`);
@@ -31,5 +37,6 @@ export function buildMockData(today: string, now = Date.now()) {
     createdAt: new Date(now - daysAgo * 86_400_000 - 3_600_000),
   }));
   const visits = data.visits.daily.map((count, i) => ({ day: isoDaysAgo(today, i), count }));
-  return { programs, notices, messages, visits };
+  const staff = (data.staff ?? []).map((m, i) => ({ ...m, sortOrder: i + 1, createdAt: new Date(now + i) }));
+  return { programs, notices, messages, staff, visits };
 }

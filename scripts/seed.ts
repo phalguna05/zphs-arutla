@@ -1,7 +1,7 @@
 import "./env";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
-import { messages, notices, programs, visitDays } from "../src/db/schema";
+import { messages, notices, programs, staff, visitDays } from "../src/db/schema";
 import { databaseUrl } from "../src/db/url";
 import { todayISO } from "../src/lib/dates";
 import { buildMockData } from "../src/lib/mock-data";
@@ -24,17 +24,19 @@ async function main() {
       await tx.delete(programs);
       await tx.delete(notices);
       await tx.delete(messages);
+      await tx.delete(staff);
       await tx.delete(visitDays);
     }
     if (data.programs.length) await tx.insert(programs).values(data.programs);
     if (data.notices.length) await tx.insert(notices).values(data.notices);
     if (data.messages.length) await tx.insert(messages).values(data.messages);
+    if (data.staff.length) await tx.insert(staff).values(data.staff);
     if (data.visits.length) await tx.insert(visitDays).values(data.visits);
   });
 
   console.log(
     `Seeded ${data.programs.length} programs, ${data.notices.length} notices, ` +
-      `${data.messages.length} messages and ${data.visits.length} days of visits.`,
+      `${data.messages.length} messages, ${data.staff.length} staff and ${data.visits.length} days of visits.`,
   );
   await pool.end();
 }

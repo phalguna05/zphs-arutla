@@ -42,6 +42,25 @@ export const visitorSessions = pgTable("visitor_sessions", {
   lastSeen: timestamp("last_seen", { withTimezone: true }).notNull().defaultNow(),
 });
 
+export const staff = pgTable("staff", {
+  id: serial("id").primaryKey(),
+  prefix: text("prefix").notNull().default(""),
+  name: text("name").notNull(),
+  designation: text("designation").notNull(),
+  subject: text("subject").notNull().default(""),
+  sortOrder: integer("sort_order").notNull().default(0),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
+export const adminUsers = pgTable("admin_users", {
+  id: serial("id").primaryKey(),
+  username: text("username").notNull().unique(),
+  passwordHash: text("password_hash").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
+});
+
 export type Program = typeof programs.$inferSelect;
 export type Notice = typeof notices.$inferSelect;
 export type Message = typeof messages.$inferSelect;
+export type StaffMember = typeof staff.$inferSelect;
+export type AdminUser = typeof adminUsers.$inferSelect;

@@ -12,11 +12,28 @@ export function LoginForm() {
     <form action={action} className="stack-14">
       <label className="field">
         {admin.usernameLabel}
-        <input className="input" name="username" autoComplete="username" defaultValue={state.username} required />
+        <input
+          className="input"
+          name="username"
+          autoComplete="username"
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
+          defaultValue={state.username}
+          required
+        />
       </label>
       <label className="field">
         {admin.passwordLabel}
-        <input className="input" name="password" type="password" autoComplete="current-password" required />
+        <input
+          className="input"
+          name="password"
+          type="password"
+          autoComplete="current-password"
+          autoCapitalize="none"
+          autoCorrect="off"
+          required
+        />
       </label>
       {state.error && <span className="form-error" role="alert">{state.error}</span>}
       <button type="submit" className="btn btn-primary btn-lg blueprint" disabled={pending}>

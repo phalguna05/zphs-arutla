@@ -1,11 +1,13 @@
 import { todayISO } from "../dates";
 import { buildMockData } from "../mock-data";
-import type { Message, Notice, Program, Store } from "./types";
+import type { AdminUser, Message, Notice, Program, StaffMember, Store } from "./types";
 
 type State = {
   programs: Program[];
   notices: Notice[];
   messages: Message[];
+  staff: StaffMember[];
+  adminUsers: AdminUser[];
   visitDays: Map<string, number>;
   sessions: Map<string, number>;
   nextId: number;
@@ -22,6 +24,8 @@ function state(): State {
     programs: data.programs.map((p) => ({ ...p, id: id++ })),
     notices: data.notices.map((n) => ({ ...n, id: id++ })),
     messages: data.messages.map((m) => ({ ...m, id: id++ })),
+    staff: data.staff.map((m) => ({ ...m, id: id++ })),
+    adminUsers: [],
     visitDays: new Map(data.visits.map((v) => [v.day, v.count])),
     sessions: new Map(),
     nextId: id,
@@ -75,9 +79,50 @@ export const mockStore: Store = {
     s.messages = s.messages.filter((m) => m.id !== id);
   },
 
+  async listStaff() {
+    return [...state().staff].sort((a, b) => a.sortOrder - b.sortOrder || a.id - b.id);
+  },
+  async addStaff(input) {
+    const s = state();
+    const sortOrder = Math.max(0, ...s.staff.map((m) => m.sortOrder)) + 1;
+    s.staff.push({ ...input, id: s.nextId++, sortOrder, createdAt: new Date() });
+  },
+  async updateStaff(id, input) {
+    const s = state();
+    s.staff = s.staff.map((m) => (m.id === id ? { ...m, ...input } : m));
+  },
+  async moveStaff(id, direction) {
+    const list = await mockStore.listStaff();
+    const from = list.findIndex((m) => m.id === id);
+    const to = direction === "up" ? from - 1 : from + 1;
+    if (from < 0 || to < 0 || to >= list.length) return;
+    [list[from], list[to]] = [list[to], list[from]];
+    list.forEach((m, i) => (m.sortOrder = i + 1));
+  },
+  async removeStaff(id) {
+    const s = state();
+    s.staff = s.staff.filter((m) => m.id !== id);
+  },
+
+  async listAdminUsers() {
+    return [...state().adminUsers];
+  },
+  async findAdminUser(username) {
+    return state().adminUsers.find((u) => u.username === username);
+  },
+  async addAdminUser(input) {
+    const s = state();
+    if (s.adminUsers.some((u) => u.username === input.username)) throw new Error("duplicate username");
+    s.adminUsers.push({ ...input, id: s.nextId++, createdAt: new Date() });
+  },
+  async removeAdminUser(id) {
+    const s = state();
+    s.adminUsers = s.adminUsers.filter((u) => u.id !== id);
+  },
+
   async counts() {
     const s = state();
-    return { programs: s.programs.length, notices: s.notices.length, messages: s.messages.length };
+    return { programs: s.programs.length, notices: s.notices.length, messages: s.messages.length, staff: s.staff.length };
   },
 
   async visits(today) {
