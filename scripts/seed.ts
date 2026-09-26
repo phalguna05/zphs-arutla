@@ -1,3 +1,4 @@
+import "./env";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
 import { messages, notices, programs, visitDays } from "../src/db/schema";

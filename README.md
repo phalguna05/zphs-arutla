@@ -46,7 +46,7 @@ apply only in development; production always needs `ADMIN_USERNAME`, `ADMIN_PASS
 
 ```bash
 npm install
-cp .env.example .env.local     # fill in DATABASE_URL, ADMIN_*, AUTH_SECRET
+cp .env.example .env           # fill in DATABASE_URL, ADMIN_*, AUTH_SECRET (.env.local also works)
 npm run db:migrate             # create tables
 npm run db:seed                # load content/mock-data.json (skips if data exists)
 npm run dev
@@ -62,7 +62,7 @@ npm run dev
 5. Deploy. The `vercel-build` script applies migrations before building. Without a database it
    skips them and the site runs on mock data, so you can deploy first and connect Postgres later
    (redeploy after adding `DATABASE_URL`).
-6. Seed once from your machine: `vercel env pull .env.local && npm run db:seed`.
+6. Seed once from your machine: `vercel env pull .env && npm run db:migrate && npm run db:seed`.
 
 ## Changing the database schema
 
