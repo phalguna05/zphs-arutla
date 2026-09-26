@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { removeNotice, removeProgram } from "@/actions/admin";
+import { removeMessage, removeNotice, removeProgram } from "@/actions/admin";
 import { signOut } from "@/actions/auth";
 import { AdminOnline, AdminVisitorStats } from "@/components/admin/AdminVisitors";
 import { NoticeForm } from "@/components/admin/NoticeForm";
@@ -29,6 +29,7 @@ const DONE_MESSAGES: Record<string, string> = {
   "program-removed": "Program removed from the website",
   "notice-added": "Notice published to the notice board",
   "notice-removed": "Notice removed from the board",
+  "message-removed": "Message deleted",
 };
 
 export default async function AdminPage({ searchParams }: { searchParams: Promise<{ tab?: string; done?: string }> }) {
@@ -191,7 +192,10 @@ async function InboxTab() {
               <span className="tag tag-neutral self-start">{m.subject}</span>
               <span className="small-15 pre-wrap">{m.message}</span>
             </div>
-            <span className="text-soft small-13 align-right">{formatTimestamp(m.createdAt)}</span>
+            <div className="inbox-side">
+              <span className="text-soft small-13">{formatTimestamp(m.createdAt)}</span>
+              <RemoveButton label="Delete" confirmLabel="Confirm delete" onConfirm={removeMessage.bind(null, m.id)} />
+            </div>
           </div>
         ))}
         {!messages.length && <p className="text-soft small-15 pad-top-16">No messages yet.</p>}

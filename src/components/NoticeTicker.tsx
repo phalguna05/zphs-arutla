@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 
 type TickerItem = { id: number; title: string; dateLabel: string };
 
-export function NoticeTicker({ items, label, linkLabel }: { items: TickerItem[]; label: string; linkLabel: string }) {
+type TickerProps = { items: TickerItem[]; label: string; linkLabel: string; emptyText: string };
+
+export function NoticeTicker({ items, label, linkLabel, emptyText }: TickerProps) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -25,7 +27,7 @@ export function NoticeTicker({ items, label, linkLabel }: { items: TickerItem[];
               <strong>{current.title}</strong> <span className="text-soft">· {current.dateLabel}</span>
             </>
           ) : (
-            "No notices"
+            emptyText
           )}
         </span>
         <Link href="/notices" className="ticker-link">{linkLabel}</Link>

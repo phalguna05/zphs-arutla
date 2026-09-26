@@ -100,3 +100,10 @@ export async function removeNotice(id: number) {
   refresh();
   redirect("/admin?tab=notices&done=notice-removed");
 }
+
+export async function removeMessage(id: number) {
+  await requireAdmin();
+  await store.removeMessage(id);
+  revalidatePath("/admin");
+  redirect("/admin?tab=inbox&done=message-removed");
+}

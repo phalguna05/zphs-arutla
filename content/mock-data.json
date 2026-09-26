@@ -1,39 +1,89 @@
 {
-  "programs": [
-    { "name": "Smart Classrooms & ICT Lab", "category": "Academic", "duration": "Full year", "coordinator": "Smt. P. Swapna", "description": "Interactive digital boards in every section of Classes VI–X and a 20-seat computer lab set up under PM SHRI. Students learn typing, spreadsheets and basic coding from Class VII." },
-    { "name": "Eco Club & Kitchen Garden", "category": "Environment", "duration": "Jun 2026 – Mar 2027", "coordinator": "Sri M. Venkatesh", "description": "Students grow leafy vegetables for the mid-day meal, run a compost pit, and planted 400 saplings on campus and along the Arutla road during Vana Mahotsav." },
-    { "name": "Annual Sports Meet", "category": "Sports", "duration": "Dec 2026", "coordinator": "Sri B. Raju (PET)", "description": "Kabaddi, kho-kho, volleyball and athletics across four houses. Winners go on to the Manchal mandal and Ranga Reddy district meets." },
-    { "name": "Science Fair & Tinkering", "category": "Academic", "duration": "Nov 2026", "coordinator": "Smt. K. Anitha", "description": "Working models built by Classes VIII–X, judged by teachers from neighbouring schools. The best three are sent to the district Bal Vaigyanik Pradarshini." },
-    { "name": "School Health Programme", "category": "Health", "duration": "Quarterly", "coordinator": "Smt. G. Sujatha", "description": "Health, eye and dental check-ups with PHC Manchal under Rashtriya Bal Swasthya Karyakram, plus weekly iron-folic acid supplementation." },
-    { "name": "Bathukamma & Culture Week", "category": "Cultural", "duration": "Sep – Oct 2026", "coordinator": "Smt. R. Padma", "description": "Students and mothers build Bathukamma together on campus, followed by a week of folk song, dance and Telugu elocution." },
-    { "name": "Spoken English Club", "category": "Academic", "duration": "Every Saturday", "coordinator": "Sri T. Naresh", "description": "Conversation circles, storytelling and debates in English for Telugu-medium students of Classes VI–VIII, with a small reading library of graded readers." },
-    { "name": "Yoga & Morning Fitness", "category": "Health", "duration": "Full year", "coordinator": "Sri B. Raju (PET)", "description": "Twenty minutes of yoga and stretching after morning assembly, with a special session on International Yoga Day in June." },
-    { "name": "Kabaddi Girls' Team", "category": "Sports", "duration": "Jul 2026 – Jan 2027", "coordinator": "Sri B. Raju (PET)", "description": "Evening practice four days a week for the girls' kabaddi team, mandal champions in 2025, preparing for the district and SGF selections." },
-    { "name": "Folk Art & Rangoli Workshop", "category": "Cultural", "duration": "Jan 2027", "coordinator": "Smt. S. Kavitha", "description": "Local artisans teach Cheriyal-style painting and rangoli over a two-week workshop before Sankranti; student work is displayed in the school corridor." },
-    { "name": "Water Audit Project", "category": "Environment", "duration": "Aug – Oct 2026", "coordinator": "Sri A. Yadagiri", "description": "Class IX students measure water use on campus, fix leaking taps with the SMC, and map rainwater harvesting options for the school and the village." }
-  ],
-  "notices": [
-    { "daysAgo": 2, "title": "SA-1 examination time table, Classes VI–X", "category": "Exams", "pinned": true, "body": "Summative Assessment 1 begins on 28 September. Students must carry their hall tickets and report by 9:15 am. The full time table is attached." },
-    { "daysAgo": 3, "title": "School closed on account of heavy rain", "category": "General", "pinned": false, "body": "Following the IMD orange alert for Ranga Reddy district, the school will remain closed tomorrow. Missed classes will be made up on the second Saturday." },
-    { "daysAgo": 4, "title": "Bathukamma and Dasara holidays", "category": "Holidays", "pinned": false, "body": "The school will remain closed for Bathukamma and Dasara as per the state calendar. Classes resume on 15 October 2026." },
-    { "daysAgo": 6, "title": "NMMS 2026–27: applications for Class VIII", "category": "Scholarships", "pinned": false, "body": "Eligible Class VIII students can apply for the National Means-cum-Merit Scholarship. Submit caste and income certificates to the class teacher by 10 October." },
-    { "daysAgo": 9, "title": "Parent–Teacher Meeting on Saturday", "category": "Events", "pinned": false, "body": "All parents are requested to attend at 10:00 am to discuss FA-2 progress and attendance. Progress cards will be shared." },
-    { "daysAgo": 12, "title": "SSC March 2027: nominal roll verification", "category": "Exams", "pinned": false, "body": "Class X students must verify name, date of birth and photograph on the nominal roll in the office before 30 September." },
-    { "daysAgo": 15, "title": "Pre-matric scholarship renewal deadline", "category": "Scholarships", "pinned": false, "body": "Students who received the pre-matric scholarship last year must renew on the ePASS portal. Bring your bank passbook and Aadhaar to the office for help." },
-    { "daysAgo": 19, "title": "Second set of uniforms distributed", "category": "General", "pinned": false, "body": "Students who have not collected their second set of uniforms may do so from the office between 3:30 and 4:30 pm." },
-    { "daysAgo": 24, "title": "Inter-house quiz competition results", "category": "Events", "pinned": false, "body": "Congratulations to Godavari House, winners of this year's general knowledge quiz. Krishna House came second. Prizes will be given at Monday's assembly." },
-    { "daysAgo": 30, "title": "FA-1 marks uploaded to the progress register", "category": "Exams", "pinned": false, "body": "Formative Assessment 1 marks for all classes are now entered. Parents can view them with the class teacher on any working day after 3:30 pm." }
-  ],
+  "programs": [],
+  "notices": [],
   "messages": [
-    { "daysAgo": 0, "name": "Ramesh Goud", "email": "ramesh.g@example.com", "phone": "9000000001", "subject": "Admissions", "message": "My son is in Class V at the MPPS. When can we apply for Class VI admission here, and is there an entrance test?" },
-    { "daysAgo": 1, "name": "Arutla alumni — batch of 2009", "email": "arutla2009@example.com", "phone": null, "subject": "Donation / alumni", "message": "We would like to donate library books and two ceiling fans for the Class X room. Who should we coordinate with?" },
-    { "daysAgo": 3, "name": "Lakshmi Devi", "email": "lakshmi.devi@example.com", "phone": "9000000002", "subject": "Transfer certificate", "message": "We are moving to Hyderabad next month. Please let me know the process and documents needed for my daughter's TC (Class VIII)." },
-    { "daysAgo": 5, "name": "Srinivas Yadav", "email": "srinivas.y@example.com", "phone": null, "subject": "General enquiry", "message": "Is the school open on the second Saturday this month? My son said there is a make-up class." },
-    { "daysAgo": 8, "name": "Priya Reddy", "email": "priya.r@example.com", "phone": "9000000003", "subject": "Complaint", "message": "The drinking water tap near the Class VI block has been leaking for a week. Could it please be repaired?" },
-    { "daysAgo": 12, "name": "Mahesh Kumar", "email": "mahesh.k@example.com", "phone": null, "subject": "General enquiry", "message": "Does the school offer any coaching for the NMMS exam? My daughter is in Class VIII." }
+    {
+      "daysAgo": 0,
+      "name": "Ramesh Goud",
+      "email": "ramesh.g@example.com",
+      "phone": "9000000001",
+      "subject": "Admissions",
+      "message": "My son is in Class V at the MPPS. When can we apply for Class VI admission here, and is there an entrance test?"
+    },
+    {
+      "daysAgo": 1,
+      "name": "Arutla alumni — batch of 2009",
+      "email": "arutla2009@example.com",
+      "phone": null,
+      "subject": "Donation / alumni",
+      "message": "We would like to donate library books and two ceiling fans for the Class X room. Who should we coordinate with?"
+    },
+    {
+      "daysAgo": 3,
+      "name": "Lakshmi Devi",
+      "email": "lakshmi.devi@example.com",
+      "phone": "9000000002",
+      "subject": "Transfer certificate",
+      "message": "We are moving to Hyderabad next month. Please let me know the process and documents needed for my daughter's TC (Class VIII)."
+    },
+    {
+      "daysAgo": 5,
+      "name": "Srinivas Yadav",
+      "email": "srinivas.y@example.com",
+      "phone": null,
+      "subject": "General enquiry",
+      "message": "Is the school open on the second Saturday this month? My son said there is a make-up class."
+    },
+    {
+      "daysAgo": 8,
+      "name": "Priya Reddy",
+      "email": "priya.r@example.com",
+      "phone": "9000000003",
+      "subject": "Complaint",
+      "message": "The drinking water tap near the Class VI block has been leaking for a week. Could it please be repaired?"
+    },
+    {
+      "daysAgo": 12,
+      "name": "Mahesh Kumar",
+      "email": "mahesh.k@example.com",
+      "phone": null,
+      "subject": "General enquiry",
+      "message": "Does the school offer any coaching for the NMMS exam? My daughter is in Class VIII."
+    }
   ],
   "visits": {
     "note": "Daily visit counts, most recent first (index 0 = today).",
-    "daily": [137, 164, 151, 142, 98, 176, 189, 158, 143, 131, 95, 162, 171, 149, 138, 127, 88, 154, 166, 147, 139, 122, 91, 158, 163, 150, 134, 119, 84, 146]
+    "daily": [
+      137,
+      164,
+      151,
+      142,
+      98,
+      176,
+      189,
+      158,
+      143,
+      131,
+      95,
+      162,
+      171,
+      149,
+      138,
+      127,
+      88,
+      154,
+      166,
+      147,
+      139,
+      122,
+      91,
+      158,
+      163,
+      150,
+      134,
+      119,
+      84,
+      146
+    ]
   }
 }

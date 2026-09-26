@@ -29,7 +29,7 @@ export default function ContactPage() {
           <div className="blueprint map">
             <Corners />
             {contact.map.embedUrl ? (
-              <iframe src={contact.map.embedUrl} title={contact.map.placeholder} loading="lazy" referrerPolicy="no-referrer-when-downgrade" />
+              <iframe src={contact.map.embedUrl} title={contact.map.placeholder} loading="lazy" allowFullScreen referrerPolicy="strict-origin-when-cross-origin" />
             ) : (
               <div className="map-placeholder">
                 <PinIcon className="accent-700-stroke" />

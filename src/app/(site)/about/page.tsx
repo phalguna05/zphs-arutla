@@ -32,6 +32,31 @@ export default function AboutPage() {
         ))}
       </section>
 
+      <section className="container section-flush stack-24">
+        <SectionHead kicker={about.campus.title} />
+        <div className="campus">
+          <div className="stack-16">
+            {about.campus.paragraphs.map((p, i) => (
+              <p key={i} className="body-text">{p}</p>
+            ))}
+          </div>
+          <div className="stack-12">
+            <span className="label-dark">{about.campus.institutionsTitle}</span>
+            {about.campus.institutions.map((item) => (
+              <span key={item} className="adm-doc">{item}</span>
+            ))}
+          </div>
+        </div>
+        <div className="stats-4">
+          {about.campus.stats.map((s) => (
+            <div key={s.label} className="stat">
+              <span className="stat-value stat-value-md">{s.value}</span>
+              <span className="body-text small-15">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="container section-flush about-cols">
         <div className="stack-16">
           <SectionHead kicker={about.faculty.title} />

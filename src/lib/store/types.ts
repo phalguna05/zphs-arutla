@@ -17,6 +17,7 @@ export interface Store {
   removeNotice(id: number): Promise<void>;
   listMessages(): Promise<Message[]>;
   addMessage(input: NewMessage): Promise<void>;
+  removeMessage(id: number): Promise<void>;
   counts(): Promise<{ programs: number; notices: number; messages: number }>;
   visits(today: string): Promise<{ total: number; today: number; online: number }>;
   recordVisit(sessionId: string, isNewVisit: boolean, today: string): Promise<void>;

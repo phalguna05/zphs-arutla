@@ -1,6 +1,12 @@
 import mock from "@content/mock-data.json";
 import type { NewMessage, NewNotice, NewProgram } from "./store/types";
 
+type MockProgram = Omit<NewProgram, "images">;
+type MockNotice = Omit<NewNotice, "date" | "attachmentUrl"> & { daysAgo: number };
+type MockMessage = NewMessage & { daysAgo: number };
+
+const data = mock as { programs: MockProgram[]; notices: MockNotice[]; messages: MockMessage[]; visits: { daily: number[] } };
+
 function isoDaysAgo(today: string, days: number) {
   const d = new Date(`${today}T00:00:00Z`);
   d.setUTCDate(d.getUTCDate() - days);
@@ -9,21 +15,21 @@ function isoDaysAgo(today: string, days: number) {
 
 /** Mock records with dates resolved relative to `today`, so "New" tags and the inbox always look current. */
 export function buildMockData(today: string, now = Date.now()) {
-  const programs = mock.programs.map((p, i) => ({
-    ...(p satisfies Omit<NewProgram, "images">),
+  const programs = data.programs.map((p, i) => ({
+    ...p,
     images: [] as string[],
     createdAt: new Date(now - i * 60_000),
   }));
-  const notices = mock.notices.map(({ daysAgo, ...n }, i) => ({
+  const notices = data.notices.map(({ daysAgo, ...n }, i) => ({
     ...n,
     date: isoDaysAgo(today, daysAgo),
     attachmentUrl: null,
     createdAt: new Date(now - i * 60_000),
-  })) satisfies (NewNotice & { createdAt: Date })[];
-  const messages = mock.messages.map(({ daysAgo, ...m }) => ({
+  }));
+  const messages = data.messages.map(({ daysAgo, ...m }) => ({
     ...m,
     createdAt: new Date(now - daysAgo * 86_400_000 - 3_600_000),
-  })) satisfies (NewMessage & { createdAt: Date })[];
-  const visits = mock.visits.daily.map((count, i) => ({ day: isoDaysAgo(today, i), count }));
+  }));
+  const visits = data.visits.daily.map((count, i) => ({ day: isoDaysAgo(today, i), count }));
   return { programs, notices, messages, visits };
 }

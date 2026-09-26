@@ -16,7 +16,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <NoticeTicker items={ticker} label={home.ticker.label} linkLabel={home.ticker.linkLabel} />
+      <NoticeTicker items={ticker} label={home.ticker.label} linkLabel={home.ticker.linkLabel} emptyText={home.ticker.emptyText} />
 
       <section className="container hero">
         <div className="stack-22">
@@ -59,7 +59,6 @@ export default async function HomePage() {
         </div>
         <div className="blueprint hm-card">
           <Corners />
-          <Photo src={home.headmaster.image.src} alt={home.headmaster.image.alt} sizes="118px" className="hm-photo" />
           <div className="stack-12">
             <span className="kicker">{home.headmaster.kicker}</span>
             <p className="quote">{home.headmaster.quote}</p>
@@ -121,6 +120,7 @@ export default async function HomePage() {
                 </div>
               </div>
             ))}
+            {!notices.length && <p className="text-soft small-15 pad-top-8">{home.notices.emptyText}</p>}
           </div>
           <Link href={home.notices.link.href} className="link-strong">{home.notices.link.label}</Link>
         </div>
@@ -137,6 +137,7 @@ export default async function HomePage() {
                 </div>
               </div>
             ))}
+            {!programs.length && <p className="text-soft small-15">{home.programs.emptyText}</p>}
           </div>
           <Link href={home.programs.link.href} className="link-strong">{home.programs.link.label}</Link>
         </div>

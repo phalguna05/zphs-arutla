@@ -54,7 +54,7 @@ export default async function ProgramsPage({ searchParams }: { searchParams: Pro
           ))}
         </section>
       ) : (
-        <p className="container empty">{copy.emptyText}</p>
+        <p className="container empty">{all.length ? copy.emptyText : copy.noneText}</p>
       )}
     </>
   );

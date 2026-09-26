@@ -2,14 +2,16 @@
 
 import { useState, useTransition } from "react";
 
-export function RemoveButton({ onConfirm }: { onConfirm: () => Promise<void> }) {
+type RemoveButtonProps = { onConfirm: () => Promise<void>; label?: string; confirmLabel?: string };
+
+export function RemoveButton({ onConfirm, label = "Remove", confirmLabel = "Confirm remove" }: RemoveButtonProps) {
   const [asking, setAsking] = useState(false);
   const [pending, startTransition] = useTransition();
 
   if (!asking) {
     return (
       <button type="button" className="btn btn-ghost small-13" onClick={() => setAsking(true)}>
-        Remove
+        {label}
       </button>
     );
   }
@@ -21,7 +23,7 @@ export function RemoveButton({ onConfirm }: { onConfirm: () => Promise<void> }) 
         disabled={pending}
         onClick={() => startTransition(() => onConfirm())}
       >
-        Confirm remove
+        {confirmLabel}
       </button>
       <button type="button" className="btn btn-secondary btn-sm" onClick={() => setAsking(false)}>
         Cancel

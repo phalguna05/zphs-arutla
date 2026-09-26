@@ -24,6 +24,7 @@ type Copy = {
   issuedBy: string;
   downloadLabel: string;
   emptyText: string;
+  noneText: string;
 };
 
 export function NoticeBoard({ notices, copy }: { notices: NoticeItem[]; copy: Copy }) {
@@ -81,7 +82,7 @@ export function NoticeBoard({ notices, copy }: { notices: NoticeItem[]; copy: Co
           </article>
         ))}
       </div>
-      {!visible.length && <p className="text-soft small-15">{copy.emptyText}</p>}
+      {!visible.length && <p className="text-soft small-15">{notices.length ? copy.emptyText : copy.noneText}</p>}
     </div>
   );
 }

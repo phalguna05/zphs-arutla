@@ -12,7 +12,7 @@ async function main() {
   const db = drizzle(pool);
   const force = process.argv.includes("--force");
 
-  const existing = await db.select({ id: programs.id }).from(programs).limit(1);
+  const existing = await db.select({ id: messages.id }).from(messages).limit(1);
   if (existing.length && !force) {
     console.log("Database already has data. Run `npm run db:seed -- --force` to replace it with mock data.");
     return pool.end();
@@ -26,10 +26,10 @@ async function main() {
       await tx.delete(messages);
       await tx.delete(visitDays);
     }
-    await tx.insert(programs).values(data.programs);
-    await tx.insert(notices).values(data.notices);
-    await tx.insert(messages).values(data.messages);
-    await tx.insert(visitDays).values(data.visits);
+    if (data.programs.length) await tx.insert(programs).values(data.programs);
+    if (data.notices.length) await tx.insert(notices).values(data.notices);
+    if (data.messages.length) await tx.insert(messages).values(data.messages);
+    if (data.visits.length) await tx.insert(visitDays).values(data.visits);
   });
 
   console.log(

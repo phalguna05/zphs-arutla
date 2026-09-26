@@ -36,6 +36,9 @@ export const postgresStore: Store = {
   async addMessage(input) {
     await db.insert(messages).values(input);
   },
+  async removeMessage(id) {
+    await db.delete(messages).where(eq(messages.id, id));
+  },
 
   async counts() {
     const [[p], [n], [m]] = await Promise.all([

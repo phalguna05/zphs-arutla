@@ -70,6 +70,10 @@ export const mockStore: Store = {
     const s = state();
     s.messages.push({ ...input, id: s.nextId++, createdAt: new Date() });
   },
+  async removeMessage(id) {
+    const s = state();
+    s.messages = s.messages.filter((m) => m.id !== id);
+  },
 
   async counts() {
     const s = state();

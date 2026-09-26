@@ -33,6 +33,13 @@ export function SiteHeader() {
             </div>
           </Link>
           <SiteNav />
+          <img
+            src={school.partnerLogo.src}
+            alt={school.partnerLogo.alt}
+            width={72}
+            height={67}
+            className="partner-logo"
+          />
         </div>
       </header>
     </>
